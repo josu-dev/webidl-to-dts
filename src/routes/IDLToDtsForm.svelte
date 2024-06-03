@@ -56,12 +56,17 @@
   <Form.Field {form} name="raw_idl" class="space-y-0">
     <Form.Control let:attrs>
       <Form.Label class="sr-only">Source Web IDL definitions</Form.Label>
-      <Textarea {...attrs} bind:value={$formData.raw_idl} class="h-full w-full resize-none" />
+      <Textarea
+        {...attrs}
+        bind:value={$formData.raw_idl}
+        class="h-full w-full resize-none font-mono"
+      />
     </Form.Control>
     <Form.FieldErrors />
   </Form.Field>
   <Form.Button size="icon" title="Transpile" class="absolute bottom-4 right-4">
-    <Icon.ArrowRightFromLine class="size-5" />
+    <Icon.ArrowRightFromLine class="hidden size-5 lg:block" />
+    <Icon.ArrowDownFromLine class="size-5 lg:hidden" />
     <span class="sr-only">Transpile</span>
   </Form.Button>
 </form>

@@ -1,7 +1,7 @@
 <script lang="ts">
   import ThemeSwitcher from '$lib/components/ThemeSwitcher.svelte';
   import { Button } from '$lib/components/ui/button/index.js';
-  import { REPOSITORY } from '$lib/constants';
+  import { DEFAULT_THEME, REPOSITORY } from '$lib/constants.js';
   import * as Icon from '$lib/icons/index.js';
   import { ModeWatcher } from 'mode-watcher';
   import '../app.css';
@@ -28,7 +28,7 @@
   ];
 </script>
 
-<ModeWatcher />
+<ModeWatcher defaultMode={DEFAULT_THEME} />
 
 <div class="grid h-screen w-full">
   <div class="flex flex-col">
@@ -42,7 +42,7 @@
 
       <nav class="ml-auto flex gap-1.5">
         <Button
-          variant="outline"
+          variant="ghost"
           href="https://webidl.spec.whatwg.org/"
           target="_blank"
           rel="noopener noreferrer"
@@ -58,7 +58,7 @@
           <span class="sr-only">Web IDL specification</span>
         </Button>
         <Button
-          variant="outline"
+          variant="ghost"
           href={REPOSITORY}
           target="_blank"
           rel="noopener noreferrer"
@@ -89,7 +89,6 @@
         </Button>
       {/each}
       <span class="text-sm">and ❤️</span>
-      <!-- <span class="text-sm">Made with ❤️ by <a href="hola.com" class="text-primary">hola</a></span> -->
     </footer>
   </div>
 </div>

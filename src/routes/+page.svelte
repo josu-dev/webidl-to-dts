@@ -1,4 +1,5 @@
 <script lang="ts">
+  import SEO from '$lib/components/SEO.svelte';
   import { Badge } from '$lib/components/ui/badge/index.js';
   import { Label } from '$lib/components/ui/label/index.js';
   import { Textarea } from '$lib/components/ui/textarea/index.js';
@@ -8,6 +9,10 @@
   let raw_webidl = $state('');
   let raw_dts = $state('');
 </script>
+
+<SEO
+  description="Convert Web IDL to TypeScript definitions powered by webidl-dts-gen. Yes there is a tool for transpiling/translating the lovely spec into nice developer-friendly types for a better DX."
+/>
 
 <main class="grid flex-1 gap-4 overflow-auto p-4 md:px-8 lg:grid-cols-2">
   <div class="relative flex-col gap-8">
@@ -22,7 +27,7 @@
       <Label for="transpilation-output" class="sr-only">Transpiled d.ts definitions</Label>
       <Textarea
         id="transpilation-output"
-        class="h-full resize-none border-0 p-3"
+        class="h-full resize-none border-0 p-3 font-mono"
         value={raw_dts}
         readonly
       />

@@ -1,3 +1,4 @@
+export { default as ArrowDownFromLine } from 'lucide-svelte/icons/arrow-down-from-line';
 export { default as ArrowRightFromLine } from 'lucide-svelte/icons/arrow-right-from-line';
 export { default as Bird } from 'lucide-svelte/icons/bird';
 export { default as Book } from 'lucide-svelte/icons/book';
@@ -9,6 +10,7 @@ export { default as LifeBuoy } from 'lucide-svelte/icons/life-buoy';
 export { default as Mic } from 'lucide-svelte/icons/mic';
 export { default as Moon } from 'lucide-svelte/icons/moon';
 export { default as Paperclip } from 'lucide-svelte/icons/paperclip';
+export { default as PcCase } from 'lucide-svelte/icons/pc-case';
 export { default as Rabbit } from 'lucide-svelte/icons/rabbit';
 export { default as Settings } from 'lucide-svelte/icons/settings';
 export { default as Settings2 } from 'lucide-svelte/icons/settings-2';
