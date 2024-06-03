@@ -1,38 +1,15 @@
-# create-svelte
+# Web IDL to d.ts
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Repository for the online [Web IDL to d.ts][this-site], which converts Web IDL definitions into TypeScript declaration (.d.ts) definitions. It is powered by [webidl-dts-gen][webidl-dts-gen].
 
-## Creating a project
+Web IDL is a format for describing interfaces meant for objects in web APIs. TypeScript declaration files (.d.ts) provide a way to describe the shape of JavaScript libraries not written in TypeScript.
 
-If you're seeing this, you've probably already done this step. Congrats!
+The transpiler is kept up-to-date thanks to a [fork][webidl-dts-gen] of the original [webidl2ts][wbidl2ts] library.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## License
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+[MIT](./LICENSE)
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+[this-site]: https://webidl-to-dts.vercel.app/
+[wbidl2ts]:https://github.com/giniedp/webidl2ts
+[webidl-dts-gen]: https://github.com/pmndrs/webidl-dts-gen
