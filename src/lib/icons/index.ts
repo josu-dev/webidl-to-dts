@@ -4,6 +4,7 @@ export { default as Bird } from 'lucide-svelte/icons/bird';
 export { default as Book } from 'lucide-svelte/icons/book';
 export { default as Bot } from 'lucide-svelte/icons/bot';
 export { default as CodeXML } from 'lucide-svelte/icons/code-xml';
+export { default as Copy } from 'lucide-svelte/icons/copy';
 export { default as CornerDownLeft } from 'lucide-svelte/icons/corner-down-left';
 export { default as Languages } from 'lucide-svelte/icons/languages';
 export { default as LifeBuoy } from 'lucide-svelte/icons/life-buoy';

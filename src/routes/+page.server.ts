@@ -40,6 +40,10 @@ export const actions = {
             );
         }
 
+        // Ensures that there are two newlines between definitions.
+        generated_dts =
+            generated_dts.replace(/([;}])\n+(type|interface|declare)/g, '$1\n\n$2').trim() + '\n';
+
         return message(form, { dts: generated_dts });
     }
 } satisfies Actions;

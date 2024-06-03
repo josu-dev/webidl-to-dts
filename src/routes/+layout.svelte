@@ -2,7 +2,6 @@
   import ThemeSwitcher from '$lib/components/ThemeSwitcher.svelte';
   import { Button } from '$lib/components/ui/button/index.js';
   import { DEFAULT_THEME, REPOSITORY } from '$lib/constants.js';
-  import * as Icon from '$lib/icons/index.js';
   import { ModeWatcher } from 'mode-watcher';
   import '../app.css';
 
@@ -35,7 +34,7 @@
     <header class="sticky top-0 z-10 flex h-[57px] items-center gap-1 border-b bg-background px-4">
       <div class="flex items-center gap-1.5">
         <Button variant="ghost" size="icon" aria-label="Home">
-          <Icon.Languages class="size-5 fill-foreground" />
+          <img src="/logo/icon_filled.svg" alt="Svelte logo" class="size-4/5 dark:invert" />
         </Button>
         <h1 class="sr-only text-xl font-semibold sm:not-sr-only">Web IDL to d.ts</h1>
       </div>
