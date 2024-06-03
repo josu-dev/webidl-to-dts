@@ -2,16 +2,16 @@ export const DEFAULT_SEO = {
     icon: '/favicon.png',
     locale: 'en_US',
     image: {
-        url: '/logo/icon_filled.svg',
-        alt: 'WebIDL to d.ts',
-        width: '512',
-        height: '512',
-        type: 'image/svg+xml'
+        url: '/logo/icon_filled.png',
+        alt: 'Web IDL to d.ts',
+        width: '128',
+        height: '128',
+        type: 'image/png'
     },
-    site_name: 'WebIDL to dts',
+    site_name: 'Web IDL to dts',
     theme_color: '#030712',
-    title_default: 'WebIDL to dts',
-    title_template: '%s - WebIDL to dts'
+    title_default: 'Web IDL to dts',
+    title_template: '%s - Web IDL to dts'
 } as const;
 
 export const DEFAULT_THEME = 'dark';
