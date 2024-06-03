@@ -4,8 +4,8 @@ export const DEFAULT_SEO = {
     image: {
         url: '/logo/icon_filled.svg',
         alt: 'WebIDL to d.ts',
-        width: 512,
-        height: 512,
+        width: '512',
+        height: '512',
         type: 'image/svg+xml'
     },
     site_name: 'WebIDL to dts',
