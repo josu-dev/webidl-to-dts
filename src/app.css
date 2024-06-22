@@ -69,10 +69,64 @@
 }
 
 @layer base {
+  :root {
+    --site-header-height: 3.5rem;
+    --site-footer-height: 0rem;
+    --site-main-height: calc(100vh - var(--site-header-height) - var(--site-footer-height));
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      --site-footer-height: 3rem;
+    }
+  }
+
   * {
     @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsla(var(--primary) / 0.75) transparent;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .code-container {
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+  }
+
+  .code-container pre {
+    padding-block: 0.75rem;
+    padding-inline: 0.75rem;
+    line-height: 1.25rem /* 20px */;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+      'Courier New', monospace;
+    font-size: 0.875rem /* 14px */;
+    min-height: 100%;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  html .shiki,
+  html .shiki span {
+    background-color: transparent;
+    color: var(--light);
+    font-style: var(--light-font-style);
+    font-weight: var(--light-font-weight);
+    text-decoration: var(--light-text-decoration);
+  }
+
+  html.dark .shiki,
+  html.dark .shiki span {
+    background-color: transparent;
+    color: var(--dark);
+    font-style: var(--dark-font-style);
+    font-weight: var(--dark-font-weight);
+    text-decoration: var(--dark-text-decoration);
   }
 }

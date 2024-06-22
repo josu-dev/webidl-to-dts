@@ -17,3 +17,9 @@ export const DEFAULT_SEO = {
 export const DEFAULT_THEME = 'dark';
 
 export const REPOSITORY = 'https://github.com/josu-dev/webidl-to-dts';
+
+export const TOAST_DURATION_SUCCESS = 2500;
+
+export const TOAST_DURATION_ERROR = 10000;
+
+export const LOCAL_STORAGE_PREFIX = 'webidl-to-dts__';

@@ -1,6 +1,7 @@
 export { default as ArrowDownFromLine } from 'lucide-svelte/icons/arrow-down-from-line';
 export { default as ArrowRightFromLine } from 'lucide-svelte/icons/arrow-right-from-line';
 export { default as Bird } from 'lucide-svelte/icons/bird';
+export { default as Blocks } from 'lucide-svelte/icons/blocks';
 export { default as Book } from 'lucide-svelte/icons/book';
 export { default as Bot } from 'lucide-svelte/icons/bot';
 export { default as CodeXML } from 'lucide-svelte/icons/code-xml';

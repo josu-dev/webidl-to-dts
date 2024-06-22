@@ -1,4 +1,5 @@
 import { idl_to_dts_schema } from '$lib/schemas/index.js';
+import { highlightTypescript } from '$lib/shiki';
 import { fail, message, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { convert } from 'webidl-dts-gen';
@@ -19,11 +20,10 @@ export const actions = {
             return fail(400, { form });
         }
 
-        let generated_dts = '';
+        let transpiled_dts: string;
         try {
-            generated_dts = await convert(form.data.raw_idl);
+            transpiled_dts = await convert(form.data.raw_idl);
         } catch (exc) {
-            console.error(exc);
             if (exc instanceof Error) {
                 if (exc.name === 'WebIDLParseError') {
                     return message(form, { error: exc.message }, { status: 400 });
@@ -33,6 +33,8 @@ export const actions = {
                 }
             }
 
+            console.error(exc);
+
             return message(
                 form,
                 { error: 'An error occurred while converting the IDL to TypeScript.' },
@@ -40,23 +42,18 @@ export const actions = {
             );
         }
 
-        // Ensures that there are two newlines between definitions.
-        generated_dts =
-            generated_dts.replace(/([;}])\n+(type|interface|declare)/g, '$1\n\n$2').trim() + '\n';
+        // prettify the output
+        transpiled_dts =
+            transpiled_dts
+                .replace(/([;}])\n+(type|interface|declare)/g, '$1\n\n$2') // Ensures two newlines between top-level declarations
+                .replace(/{\s+}/g, '{}') // Removes whitespace between empty object literals
+                .trim() + '\n';
 
-        return message(form, { dts: generated_dts });
+        const result = {
+            // dts: transpiled_dts,
+            dts_highlighted: await highlightTypescript(transpiled_dts)
+        };
+
+        return message(form, result);
     }
 } satisfies Actions;
-
-const test_example = `
-dictionary CookieStoreGetOptions {
-  USVString name;
-  USVString url;
-};
-
-enum CookieSameSite {
-  "strict",
-  "lax",
-  "none"
-};
-`;

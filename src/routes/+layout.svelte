@@ -1,11 +1,14 @@
 <script lang="ts">
   import ThemeSwitcher from '$lib/components/ThemeSwitcher.svelte';
   import { Button } from '$lib/components/ui/button/index.js';
+  import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+  import { Toaster } from '$lib/components/ui/sonner/index.js';
   import { DEFAULT_THEME, REPOSITORY } from '$lib/constants.js';
+  import * as Icons from '$lib/icons/index.js';
   import { ModeWatcher } from 'mode-watcher';
   import '../app.css';
 
-  let { data, children } = $props();
+  let { children } = $props();
 
   const thanks_list = [
     {
@@ -23,15 +26,24 @@
       url: 'https://github.com/pmndrs/webidl-dts-gen',
       icon_url: 'https://github.com/favicon.ico',
       icon_class: 'dark:invert'
+    },
+    {
+      label: 'Shiki',
+      url: 'https://shiki.style/',
+      icon_url: 'https://shiki.style/logo.svg'
     }
   ];
 </script>
 
 <ModeWatcher defaultMode={DEFAULT_THEME} />
 
-<div class="grid h-screen w-full">
+<Toaster richColors />
+
+<div class="grid h-screen w-full overflow-hidden">
   <div class="flex flex-col">
-    <header class="sticky top-0 z-10 flex h-[57px] items-center gap-1 border-b bg-background px-4">
+    <header
+      class="sticky top-0 z-10 flex h-[--site-header-height] items-center gap-1 border-b bg-background px-4"
+    >
       <div class="flex items-center gap-1.5">
         <Button variant="ghost" size="icon" aria-label="Home">
           <img src="/logo/icon_filled.svg" alt="Svelte logo" class="size-4/5 dark:invert" />
@@ -39,7 +51,41 @@
         <h1 class="sr-only text-xl font-semibold sm:not-sr-only">Web IDL to d.ts</h1>
       </div>
 
-      <nav class="ml-auto flex gap-1.5">
+      <nav class="ml-auto flex sm:gap-1.5">
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger asChild let:builder>
+            <Button
+              builders={[builder]}
+              variant="ghost"
+              size="icon"
+              title="Thanks list"
+              class="lg:hidden"
+            >
+              <Icons.Blocks class="h-5 w-5" />
+              <span class="sr-only">Toggle thanks list</span>
+            </Button>
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Content align="end" class="text-sm lg:hidden">
+            <div class="relative flex select-none items-center rounded-sm px-2 py-1.5">
+              <span class="mx-auto py-0.5 font-medium">Made with 📦</span>
+            </div>
+            {#each thanks_list as { label, url, icon_url, icon_class }}
+              <DropdownMenu.Item
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="cursor-pointer"
+              >
+                <img src={icon_url} alt="{label} icon" class="mr-2 h-5 w-5 {icon_class ?? ''}" />
+                <span>{label}</span>
+              </DropdownMenu.Item>
+            {/each}
+            <div class="relative flex select-none items-center rounded-sm px-2 py-1.5">
+              <span class="mx-auto">and ❤️</span>
+            </div>
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>
+
         <Button
           variant="ghost"
           href="https://webidl.spec.whatwg.org/"
@@ -56,6 +102,7 @@
           />
           <span class="sr-only">Web IDL specification</span>
         </Button>
+
         <Button
           variant="ghost"
           href={REPOSITORY}
@@ -68,12 +115,17 @@
           <img src="/icon/github-mark.svg" alt="Github logo" class="size-5 dark:invert" />
           <span class="sr-only">Github repository</span>
         </Button>
+
         <ThemeSwitcher />
       </nav>
     </header>
+
     {@render children()}
-    <footer class="flex items-center justify-center border-t bg-background p-2">
-      <span class="text-sm">Made with</span>
+
+    <footer
+      class="hidden h-[--site-footer-height] items-center justify-center border-t bg-background p-2 text-sm lg:flex"
+    >
+      <span>Made with</span>
       {#each thanks_list as { label, url, icon_url, icon_class }}
         <Button
           variant="link"
@@ -83,11 +135,11 @@
           rel="noopener noreferrer"
           class="px-2"
         >
-          <img src={icon_url} alt="{label} icon" class="size-5 md:mr-2 {icon_class ?? ''}" />
-          <span class="sr-only text-sm md:not-sr-only">{label}</span>
+          <img src={icon_url} alt="{label} icon" class="mr-2 size-5 {icon_class ?? ''}" />
+          <span class="sr-only md:not-sr-only">{label}</span>
         </Button>
       {/each}
-      <span class="text-sm">and ❤️</span>
+      <span>and ❤️</span>
     </footer>
   </div>
 </div>

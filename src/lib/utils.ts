@@ -58,15 +58,3 @@ export const flyAndScale = (
         easing: cubicOut
     };
 };
-
-type CopyToClipboardOptions = {
-    text: () => string;
-    onsuccess?: () => void;
-    onerror?: (error: unknown) => void;
-};
-
-export function copy_to_clipboard(options: CopyToClipboardOptions) {
-    return function () {
-        navigator.clipboard.writeText(options.text()).then(options.onsuccess, options.onerror);
-    };
-}
