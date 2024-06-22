@@ -1,6 +1,6 @@
 import { idl_to_dts_schema } from '$lib/schemas/index.js';
 import { highlightTypescript } from '$lib/shiki';
-import { fail, message, superValidate } from 'sveltekit-superforms';
+import { fail, message, setError, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { convert } from 'webidl-dts-gen';
 import type { Actions, PageServerLoad } from './$types';
@@ -26,20 +26,18 @@ export const actions = {
         } catch (exc) {
             if (exc instanceof Error) {
                 if (exc.name === 'WebIDLParseError') {
-                    return message(form, { error: exc.message }, { status: 400 });
+                    return setError(form, '', exc.message);
                 }
                 if (exc.message.toLowerCase().includes('unsupported idl')) {
-                    return message(form, { error: exc.message }, { status: 400 });
+                    return setError(form, '', exc.message);
                 }
             }
 
-            console.error(exc);
+            console.error('Unexpected error while converting IDL to TypeScript:', exc);
 
-            return message(
-                form,
-                { error: 'An error occurred while converting the IDL to TypeScript.' },
-                { status: 500 }
-            );
+            return setError(form, '', 'An error occurred while converting the IDL to TypeScript.', {
+                status: 500
+            });
         }
 
         // prettify the output

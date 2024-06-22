@@ -59,7 +59,7 @@ enum CookieSameSite {
     multipleSubmits: 'abort',
     onChange(event) {
       const new_source = event.get('raw_idl');
-      if (new_source === last_raw_idl) {
+      if (new_source === last_raw_idl || new_source.length === 0) {
         return;
       }
 
@@ -73,11 +73,16 @@ enum CookieSameSite {
     },
     onUpdated(data) {
       if (!data.form.valid) {
-        console.error(data.form);
+        let errorMessage = '';
+        if (data.form.errors._errors) {
+          errorMessage += String(data.form.errors._errors);
+        }
+        if (data.form.errors.raw_idl) {
+          errorMessage += String(data.form.errors.raw_idl);
+        }
 
-        let title = data.form.message.error as string;
+        let title = errorMessage;
         let description;
-
         if (title.includes('error at line')) {
           const first_new_line = title.indexOf('\n');
           if (first_new_line > 0) {
@@ -150,7 +155,7 @@ enum CookieSameSite {
         toast.success(on_success, { duration: TOAST_DURATION_SUCCESS });
       },
       (err) => {
-        console.error('Failed to copy: ', err);
+        console.debug('Failed to copy: ', err);
         toast.error(on_error, { duration: TOAST_DURATION_SUCCESS * 2 });
       }
     );
@@ -179,7 +184,7 @@ enum CookieSameSite {
           <Textarea
             {...attrs}
             bind:value={$formData.raw_idl}
-            spellcheck="false"
+            spellcheck={false}
             class="h-full w-full resize-none whitespace-pre-wrap break-all px-3 py-3 font-mono text-sm"
           />
         </Form.Control>
